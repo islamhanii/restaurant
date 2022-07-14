@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/chefs', [ChefController::class, 'index']);
+Route::get('/chefs/create', [ChefController::class, 'create']);
+Route::post('/chefs/store', [ChefController::class, 'store']);
