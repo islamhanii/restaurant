@@ -65,7 +65,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @yield('chefs-link-active')">
       <a class="nav-link" data-bs-toggle="collapse" href="#chefs" aria-expanded="false" aria-controls="chefs">
         <i class="menu-icon mdi mdi-pot-mix"></i>
         <span class="menu-title">Chefs</span>
@@ -73,12 +73,12 @@
       </a>
       <div class="collapse" id="chefs">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{url('chefs/')}}">All</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('chefs/create')}}">Create</a></li>
+          <li class="nav-item"> <a class="nav-link @yield('all-chefs-link-active')" href="{{url('chefs/')}}">All</a></li>
+          <li class="nav-item"> <a class="nav-link @yield('create-chef-link-active')" href="{{url('chefs/create')}}">Create</a></li>
         </ul>
       </div>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @yield('cats-link-active')">
       <a class="nav-link" data-bs-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="categories">
         <i class="menu-icon mdi mdi-sitemap"></i>
         <span class="menu-title">Categories</span>
@@ -86,13 +86,12 @@
       </a>
       <div class="collapse" id="categories">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+          <li class="nav-item"> <a class="nav-link @yield('all-cats-link-active')" href="{{url('categories/')}}">All</a></li>
+          <li class="nav-item"> <a class="nav-link @yield('create-cat-link-active')" href="{{url('categories/create')}}">Create</a></li>
         </ul>
       </div>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @yield('dishes-link-active')">
       <a class="nav-link" data-bs-toggle="collapse" href="#dishes" aria-expanded="false" aria-controls="dishes">
         <i class="menu-icon mdi mdi-google-circles-extended"></i>
         <span class="menu-title">Dishes</span>
@@ -100,9 +99,8 @@
       </a>
       <div class="collapse" id="dishes">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+          <li class="nav-item"> <a class="nav-link @yield('all-dishes-link-active')" href="{{url('dishes/')}}">All</a></li>
+          <li class="nav-item"> <a class="nav-link @yield('create-dish-link-active')" href="{{url('dishes/create')}}">Create</a></li>
         </ul>
       </div>
     </li>

@@ -5,17 +5,17 @@
 @extends('partials._sidebar')
 @extends('partials._footer')
 
-@section('page-title') Create Chef @endsection
-@section('chefs-link-active') active @endsection
-@section('create-chef-link-active') active @endsection
+@section('page-title') Create Dish @endsection
+@section('dishes-link-active') active @endsection
+@section('create-dish-link-active') active @endsection
 
 @section('main')
 
 <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Our new chef</h4>
-        <form class="forms-sample" method="POST" action="{{url("/chefs/store")}}" enctype="multipart/form-data">
+        <h4 class="card-title">Our new dish</h4>
+        <form class="forms-sample" method="POST" action="{{url("/dishes/store")}}" enctype="multipart/form-data">
             @if(Session::has('success'))
                 <div class="col-12 mb-2 alert-success rounded-3 p-2">
                     <p class="mb-0 lh-base">{{Session::get('success')}}</p>
@@ -39,6 +39,19 @@
                 <label for="exampleFormControlTextarea1">Description</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="description">{{old('description')?old('description'):''}}</textarea>
             </div>
+            <div class="form-group">
+                <label for="exampleFormControlNumber1">Price</label>
+                <input type="number" class="form-control" id="exampleFormControlNumber1" name="price" value="{{old('price')?old('price'):''}}" step=".01">
+            </div>
+            <div class="form-group">
+                <label for="validationCustom04">Category</label>
+                <select class="custom-select" id="validationCustom04" name="category_id">
+                  <option selected disabled value="">Choose...</option>
+                  @foreach ($categories as $category)
+                    <option value="{{$category->id}}" @if(old('category_id') == $category->id) selected @endif>{{$category->name}}</option>
+                  @endforeach
+                </select>
+              </div>
             <div class="custom-file mb-3">
                 <input type="file" class="custom-file-input" id="customFile" name="image">
                 <label class="custom-file-label" for="customFile">Choose file</label>

@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Restaurant Dashboard </title>
+    <title>Restaurant Dashboard |@yield('page-title')</title>
     
     <link rel="stylesheet" href="{{asset("vendors/feather/feather.css")}}">
     <link rel="stylesheet" href="{{asset("vendors/mdi/css/materialdesignicons.min.css")}}">
@@ -19,23 +19,7 @@
     <link rel="shortcut icon" href="{{asset("images/favicon.png")}}"/>
   </head>
   <body>
-    <div class="container-scroller">
-      @yield('navbar')
-      
-      <div class="container-fluid page-body-wrapper">
-        @yield('settings')
-        @yield('sidebar')
-
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="row">
-              @yield('main')
-            </div>
-          </div>
-          @yield('footer')
-        </div>
-      </div>
-    </div>
+    @yield('page-body')
 
     <script src="{{asset("vendors/js/vendor.bundle.base.js")}}"></script>
     <script src="{{asset("vendors/chart.js/Chart.min.js")}}"></script>

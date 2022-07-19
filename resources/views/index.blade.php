@@ -1,10 +1,22 @@
 @extends('layout')
+@extends('partials._body')
 @extends('partials._navbar')
 @extends('partials._settings-panel')
 @extends('partials._sidebar')
 @extends('partials._footer')
 
 @section('dashboard-link-active') active @endsection
+
+@section('page-title') Overview @endsection
+
+@section('welcome-message')
+<ul class="navbar-nav">
+  <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+    <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
+    <h3 class="welcome-sub-text">Your performance summary this week </h3>
+  </li>
+</ul>
+@endsection
 
 @section('main')
 <div class="col-sm-12">

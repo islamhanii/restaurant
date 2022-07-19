@@ -24758,9 +24758,6 @@ dl li {
 }
 
 /* Modals */
-.modal .modal-dialog {
-  margin-top: 100px;
-}
 
 .modal .modal-dialog .modal-content .modal-header {
   padding: 25px 26px;
@@ -25539,8 +25536,8 @@ dl li {
 }
 
 .table td img {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
 }
 
@@ -31259,3 +31256,12 @@ div.tagsinput span.tag a {
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+
+.ellipsis-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+            line-clamp: 3; 
+    -webkit-box-orient: vertical;
+}

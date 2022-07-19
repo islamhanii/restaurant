@@ -2,16 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\ImageStorage;
 use App\Models\Chef;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ChefController extends Controller
 {
+    use ImageStorage;
+
+    private $chefModel;
+
+    public function __construct(Chef $chef) {
+        $this->chefModel = $chef;
+    }
+
+    /*******************************************************************************************/
+
     public function index() {
-        $chefs = Chef::get();
+        $chefs = $this->chefModel->get();
         return view('chefs.index', compact('chefs'));
     }
+
+    public function show($chef_id) {
+        $chef = $this->chefModel->findOrFail($chef_id);
+        return view('chefs.show', compact('chef'));
+    }
+
+    /*******************************************************************************************/
 
     public function create() {
         return view('chefs.create');
@@ -19,19 +36,67 @@ class ChefController extends Controller
 
     public function store(Request $request) {
         $request->validate([
-            'name' => 'required|string|min:3|max:150',
-            'description' => 'required|string|min:10|max:500',
+            'name' => 'required|string|min:3|max:250',
+            'description' => 'required|string|min:10|max:5000',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:512'
         ]);
 
-        $path = Storage::putFile('chefs', $request->file('image'));
+        $path = $this->uploadImage($request, 'chefs');
 
-        Chef::create([
+        $this->chefModel->create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $path
         ]);
 
+        session()->flash('success', 'Chef was added successfully');
+
+        return redirect(url("/chefs/create"));
+    }
+
+    /*******************************************************************************************/
+
+    public function edit($chef_id) {
+        $chef = $this->chefModel->findOrFail($chef_id);
+        return view('chefs.edit', compact('chef'));
+    }
+
+    public function update(Request $request) {
+        $request->validate([
+            'id' => 'required|exists:chefs,id',
+            'name' => 'required|string|min:3|max:250',
+            'description' => 'required|string|min:10|max:5000',
+            'image' => 'image|mimes:jpg,png,jpeg|max:512'
+        ]);
+
+        $chef = $this->chefModel->find($request->id);
+        $path = $this->uploadImage($request, 'chefs', $chef);
+
+        $chef->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $path
+        ]);
+
+        session()->flash('success', 'Chef was updated successfully');
+
+        return redirect(url("/chefs/edit/$request->id"));
+    }
+
+    /*******************************************************************************************/
+
+    public function delete(Request $request) {
+        $request->validate([
+            'id' => 'required|exists:chefs,id'
+        ], [
+            '*' => 'You try to delete unfounded Chef'
+        ]);
+
+        $chef = $this->chefModel->find($request->id);
+        $chef->delete();
+        $this->deleteImage($chef->image);
+
+        session()->flash('success', 'Chef was deleted successfully');
         return redirect(url("/chefs"));
     }
 }
