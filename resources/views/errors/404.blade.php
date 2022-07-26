@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admins.layout')
 
 @section('page-title') Error 404 @endsection
 
@@ -19,7 +19,7 @@
             </div>
             <div class="row mt-5">
               <div class="col-12 text-center mt-xl-2">
-                <a class="text-white font-weight-medium" href="{{url('/')}}">Back to home</a>
+                <a class="text-white font-weight-medium" href="{{url()->previous()}}">Back</a>
               </div>
             </div>
             <div class="row mt-5">
