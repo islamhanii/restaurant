@@ -23,19 +23,19 @@ class DishController extends Controller
 
     public function index() {
         $dishes = $this->dishModel->with('category')->get();
-        return view('dishes.index', compact('dishes'));
+        return view('admins.dishes.index', compact('dishes'));
     }
 
     public function show($dish_id) {
         $dish = $this->dishModel->findOrFail($dish_id);
-        return view('dishes.show', compact('dish'));
+        return view('admins.dishes.show', compact('dish'));
     }
 
     /*******************************************************************************************/
 
     public function create() {
         $categories = $this->categoryModel->get();
-        return view('dishes.create', compact('categories'));
+        return view('admins.dishes.create', compact('categories'));
     }
 
     public function store(Request $request) {
@@ -59,7 +59,7 @@ class DishController extends Controller
 
         session()->flash('success', 'Dish was added successfully');
 
-        return redirect(url("/dishes/create"));
+        return redirect(route('dish.create'));
     }
 
     /*******************************************************************************************/
@@ -67,7 +67,7 @@ class DishController extends Controller
     public function edit($dish_id) {
         $dish = $this->dishModel->findOrFail($dish_id);
         $categories = $this->categoryModel->get();
-        return view('dishes.edit', compact('dish', 'categories'));
+        return view('admins.dishes.edit', compact('dish', 'categories'));
     }
 
     public function update(Request $request) {
@@ -93,7 +93,7 @@ class DishController extends Controller
 
         session()->flash('success', 'Dish was updated successfully');
 
-        return redirect(url("/dishes/edit/$request->id"));
+        return redirect(route('dish.edit'));
     }
 
     /*******************************************************************************************/
@@ -110,6 +110,6 @@ class DishController extends Controller
         $this->deleteImage($dish->image);
 
         session()->flash('success', 'Dish was deleted successfully');
-        return redirect(url("/dishes"));
+        return redirect(route('dishes'));
     }
 }

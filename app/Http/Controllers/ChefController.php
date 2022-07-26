@@ -20,18 +20,18 @@ class ChefController extends Controller
 
     public function index() {
         $chefs = $this->chefModel->get();
-        return view('chefs.index', compact('chefs'));
+        return view('admins.chefs.index', compact('chefs'));
     }
 
     public function show($chef_id) {
         $chef = $this->chefModel->findOrFail($chef_id);
-        return view('chefs.show', compact('chef'));
+        return view('admins.chefs.show', compact('chef'));
     }
 
     /*******************************************************************************************/
 
     public function create() {
-        return view('chefs.create');
+        return view('admins.chefs.create');
     }
 
     public function store(Request $request) {
@@ -51,14 +51,14 @@ class ChefController extends Controller
 
         session()->flash('success', 'Chef was added successfully');
 
-        return redirect(url("/chefs/create"));
+        return redirect(redirect(route('chef.create')));
     }
 
     /*******************************************************************************************/
 
     public function edit($chef_id) {
         $chef = $this->chefModel->findOrFail($chef_id);
-        return view('chefs.edit', compact('chef'));
+        return view('admins.chefs.edit', compact('chef'));
     }
 
     public function update(Request $request) {
@@ -80,7 +80,7 @@ class ChefController extends Controller
 
         session()->flash('success', 'Chef was updated successfully');
 
-        return redirect(url("/chefs/edit/$request->id"));
+        return redirect(redirect(route('chef.edit')));
     }
 
     /*******************************************************************************************/
@@ -97,6 +97,6 @@ class ChefController extends Controller
         $this->deleteImage($chef->image);
 
         session()->flash('success', 'Chef was deleted successfully');
-        return redirect(url("/chefs"));
+        return redirect(redirect(route('chefs')));
     }
 }

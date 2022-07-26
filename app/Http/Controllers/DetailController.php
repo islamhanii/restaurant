@@ -20,18 +20,18 @@ class DetailController extends Controller
 
     public function index() {
         $details = $this->detailModel->get();
-        return view('details.index', compact('details'));
+        return view('admins.details.index', compact('details'));
     }
 
     public function show($detail_id) {
         $detail = $this->detailModel->findOrFail($detail_id);
-        return view('details.show', compact('detail'));
+        return view('admins.details.show', compact('detail'));
     }
 
     /*******************************************************************************************/
 
     public function create() {
-        return view('details.create');
+        return view('admins.details.create');
     }
 
     public function store(Request $request) {
@@ -49,14 +49,14 @@ class DetailController extends Controller
 
         session()->flash('success', 'Detail was added successfully');
 
-        return redirect(url("/details/create"));
+        return redirect(route('detail.create'));
     }
 
     /*******************************************************************************************/
 
     public function edit($detail_id) {
         $detail = $this->detailModel->findOrFail($detail_id);
-        return view('details.edit', compact('detail'));
+        return view('admins.details.edit', compact('detail'));
     }
 
     public function update(Request $request) {
@@ -77,7 +77,7 @@ class DetailController extends Controller
 
         session()->flash('success', 'Detail was updated successfully');
 
-        return redirect(url("/details/edit/$request->id"));
+        return redirect(route('detail.edit'));
     }
 
     /*******************************************************************************************/
@@ -94,6 +94,6 @@ class DetailController extends Controller
         $this->deleteImage($detail->image);
 
         session()->flash('success', 'Detail was deleted successfully');
-        return redirect(url("/details"));
+        return redirect(route('details'));
     }
 }

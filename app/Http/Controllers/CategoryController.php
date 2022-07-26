@@ -17,19 +17,19 @@ class CategoryController extends Controller
 
     public function index() {
         $categories = $this->categoryModel->get();
-        return view('categories.index', compact('categories'));
+        return view('admins.categories.index', compact('categories'));
     }
 
     public function show($category_id) {
         $category = $this->categoryModel->with('dishes')->findOrFail($category_id);
 
-        return view('categories.show', compact('category'));
+        return view('admins.categories.show', compact('category'));
     }
 
     /*******************************************************************************************/
 
     public function create() {
-        return view('categories.create');
+        return view('admins.categories.create');
     }
 
     public function store(Request $request) {
@@ -43,14 +43,14 @@ class CategoryController extends Controller
 
         session()->flash('success', 'Category was added successfully');
 
-        return redirect(url("/categories/create"));
+        return redirect(route('category.create'));
     }
 
     /*******************************************************************************************/
 
     public function edit($category_id) {
         $category = $this->categoryModel->findOrFail($category_id);
-        return view('categories.edit', compact('category'));
+        return view('admins.categories.edit', compact('category'));
     }
 
     public function update(Request $request) {
@@ -67,7 +67,7 @@ class CategoryController extends Controller
 
         session()->flash('success', 'Category was updated successfully');
 
-        return redirect(url("/categories/edit/$request->id"));
+        return redirect(route('category.edit'));
     }
 
     /*******************************************************************************************/
@@ -83,6 +83,6 @@ class CategoryController extends Controller
         $category->delete();
 
         session()->flash('success', 'Category was deleted successfully');
-        return redirect(url("/categories"));
+        return redirect(route('categories'));
     }
 }

@@ -16,24 +16,35 @@ class InformationController extends Controller
     /*******************************************************************************************/
 
     public function index() {
-        $information = $this->informationModel->get();
-        return view('information.index', compact('information'));
+        $informations = $this->informationModel->get();
+        return view('admins.informations.index', compact('informations'));
     }
 
-    public function show($information_id) {
-        $information = $this->informationModel->findOrFail($information_id);
-        return view('information.show', compact('information'));
+    /*******************************************************************************************/
+
+    public function generateTypes() {
+        return [
+            'name' => 'Name',
+            'email' => 'Email',
+            'opening-hours' => 'Opening Hours',
+            'address' => 'Address',
+            'facebook' => 'Facebook',
+            'youtube' => 'Youtube',
+            'twitter' => 'Twitter',
+            'instagram' => 'Instagram'
+        ];
     }
 
     /*******************************************************************************************/
 
     public function create() {
-        return view('information.create');
+        $types = $this->generateTypes();
+        return view('admins.informations.create', compact('types'));
     }
 
     public function store(Request $request) {
         $request->validate([
-            'type' => 'required|string|min:3|max:250',
+            'type' => 'required|in:phone,email,opening-hours,address,facebook,youtube,twitter,instagram',
             'value' => 'required|string|min:3|max:250'
         ]);
 
@@ -44,19 +55,20 @@ class InformationController extends Controller
 
         session()->flash('success', 'Information was added successfully');
 
-        return redirect(url("/information/create"));
+        return redirect(route('information.create'));
     }
 
     /*******************************************************************************************/
 
     public function edit($information_id) {
         $information = $this->informationModel->findOrFail($information_id);
-        return view('information.edit', compact('information'));
+        $types = $this->generateTypes();
+        return view('admins.informations.edit', compact('information', 'types'));
     }
 
     public function update(Request $request) {
         $request->validate([
-            'id' => 'required|exists:information,id',
+            'id' => 'required|exists:informations,id',
             'type' => 'required|string|min:3|max:250',
             'value' => 'required|string|min:3|max:250'
         ]);
@@ -70,14 +82,14 @@ class InformationController extends Controller
 
         session()->flash('success', 'Information was updated successfully');
 
-        return redirect(url("/information/edit/$request->id"));
+        return redirect(route('information.edit'));
     }
 
     /*******************************************************************************************/
 
     public function delete(Request $request) {
         $request->validate([
-            'id' => 'required|exists:information,id'
+            'id' => 'required|exists:informations,id'
         ], [
             '*' => 'You try to delete unfounded Information'
         ]);
@@ -86,6 +98,6 @@ class InformationController extends Controller
         $information->delete();
 
         session()->flash('success', 'Information was deleted successfully');
-        return redirect(url("/information"));
+        return redirect(route('informations'));
     }
 }
