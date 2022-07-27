@@ -93,7 +93,7 @@ class DishController extends Controller
 
         session()->flash('success', 'Dish was updated successfully');
 
-        return redirect(route('dish.edit'));
+        return redirect(route('dish.edit', $dish->id));
     }
 
     /*******************************************************************************************/

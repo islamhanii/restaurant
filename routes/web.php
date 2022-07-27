@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\OverviewController;
+use App\Http\Controllers\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,11 @@ use App\Http\Controllers\OverviewController;
 |
 */
 
-Route::get('/', function () {
-    return view('restaurant.index');
-})->name('restaurant.home');
+Route::get('/', [RestaurantController::class, 'index'])->name('restaurant.home');
 
 
 /*============================== ADMIN Login ================================*/
-Route::get('/admin/login', [AuthController::class, 'loginPage'])->name('login');
+Route::get('/admin/login', [AuthController::class, 'loginPage'])->name('login')->middleware('not-auth');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('login.store');
 
 Route::middleware('auth')->prefix('/admin')->group(function() {

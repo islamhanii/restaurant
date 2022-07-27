@@ -77,7 +77,7 @@ class DetailController extends Controller
 
         session()->flash('success', 'Detail was updated successfully');
 
-        return redirect(route('detail.edit'));
+        return redirect(route('detail.edit', $detail->id));
     }
 
     /*******************************************************************************************/

@@ -51,7 +51,7 @@ class ChefController extends Controller
 
         session()->flash('success', 'Chef was added successfully');
 
-        return redirect(redirect(route('chef.create')));
+        return redirect(route('chef.create'));
     }
 
     /*******************************************************************************************/
@@ -80,7 +80,7 @@ class ChefController extends Controller
 
         session()->flash('success', 'Chef was updated successfully');
 
-        return redirect(redirect(route('chef.edit')));
+        return redirect(route('chef.edit', $chef->id));
     }
 
     /*******************************************************************************************/
@@ -97,6 +97,6 @@ class ChefController extends Controller
         $this->deleteImage($chef->image);
 
         session()->flash('success', 'Chef was deleted successfully');
-        return redirect(redirect(route('chefs')));
+        return redirect(route('chefs'));
     }
 }

@@ -31,10 +31,10 @@
                         <td>{{$dish->name}}</td>
                         <td class="d-none d-xl-table-cell">{{$dish->price}}</td>
                         <td>
-                          <a href="{{route("dish.show", $dish->id")}}" class="btn btn-dark btn-rounded btn-icon">
+                          <a href="{{route("dish.show", $dish->id)}}" class="btn btn-dark btn-rounded btn-icon">
                             <i class="mdi mdi-eye"></i>
                           </a>
-                          <a href="{{route("dish.edit", $dish->id")}}" class="btn btn-warning btn-rounded btn-icon ml-2">
+                          <a href="{{route("dish.edit", $dish->id)}}" class="btn btn-warning btn-rounded btn-icon ml-2">
                             <i class="mdi mdi-lead-pencil"></i>
                           </a>
                           <button type="button" class="btn btn-danger btn-rounded btn-icon ml-2" data-bs-toggle="modal" data-bs-target="#deleteDish{{$dish->id}}">

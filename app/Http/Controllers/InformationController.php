@@ -82,7 +82,7 @@ class InformationController extends Controller
 
         session()->flash('success', 'Information was updated successfully');
 
-        return redirect(route('information.edit'));
+        return redirect(route('information.edit', $information->id));
     }
 
     /*******************************************************************************************/

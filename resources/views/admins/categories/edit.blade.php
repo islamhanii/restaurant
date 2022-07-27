@@ -13,7 +13,7 @@
 <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Update <a href="{{route("category.update", $category->id)}}" class="text-decoration-none"><span class="text-primary">{{$category->name}}</span></a> category</h4>
+            <h4 class="card-title">Update <a href="{{route("category.show", $category->id)}}" class="text-decoration-none"><span class="text-primary">{{$category->name}}</span></a> category</h4>
             <form class="forms-sample" method="POST" action="{{route("category.update")}}">
                 @if(Session::has('success'))
                     <div class="col-12 mb-2 alert-success rounded-3 p-2">

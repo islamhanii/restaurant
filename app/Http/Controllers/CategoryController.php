@@ -67,7 +67,7 @@ class CategoryController extends Controller
 
         session()->flash('success', 'Category was updated successfully');
 
-        return redirect(route('category.edit'));
+        return redirect(route('category.edit', $category->id));
     }
 
     /*******************************************************************************************/
