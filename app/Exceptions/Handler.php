@@ -32,6 +32,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->renderable(function (\Illuminate\Database\QueryException $e, $request) {
+            if ($request->is('*')) {
+                return response()->view('errors.500');
+            }
+        });
     }
 }
