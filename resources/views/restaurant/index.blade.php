@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6 ">
-                <div class="about-img"><img src="img/about.jpg" class="img-responsive" alt=""></div>
+                <div class="about-img"><img src="{{asset("restaurant/images/about.jpg")}}" class="img-responsive" alt=""></div>
             </div>
             <div class="col-xs-12 col-md-6">
                 <div class="about-text">

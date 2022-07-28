@@ -21,19 +21,27 @@ use App\Http\Controllers\RestaurantController;
 |
 */
 
+/*============================== RESTAURANT Routes ================================*/
 Route::get('/', [RestaurantController::class, 'index'])->name('restaurant.home');
+Route::get('/menu', [RestaurantController::class, 'menu'])->name('restaurant.menu');
+Route::get('/gallery', [RestaurantController::class, 'gallery'])->name('restaurant.gallery');
+Route::get('/chefs', [RestaurantController::class, 'chefs'])->name('restaurant.chefs');
+Route::get('/contact', [RestaurantController::class, 'contact'])->name('restaurant.contact');
+
+/*============================== CONTACT Route ================================*/
+Route::post('/store', [ContactController::class, 'store'])->name('contact.store');
 
 
-/*============================== ADMIN Login ================================*/
+/*============================== ADMIN Login Routes ================================*/
 Route::get('/admin/login', [AuthController::class, 'loginPage'])->name('login')->middleware('not-auth');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('login.store');
 
 Route::middleware('auth')->prefix('/admin')->group(function() {
-    /*============================== ADMIN Main ================================*/
+    /*============================== ADMIN Main Routes ================================*/
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/home', [OverviewController::class, 'index'])->name('overview');
 
-    /*============================== ADMIN Chefs ================================*/
+    /*============================== ADMIN Chefs Routes ================================*/
     Route::prefix('/chefs')->group(function(){
         Route::get('/', [ChefController::class, 'index'])->name('chefs');
         Route::get('/show/{chef_id}', [ChefController::class, 'show'])->name('chef.show');
@@ -44,7 +52,7 @@ Route::middleware('auth')->prefix('/admin')->group(function() {
         Route::delete('/delete', [ChefController::class, 'delete'])->name('chef.delete');
     });
     
-    /*============================== ADMIN Categories ================================*/
+    /*============================== ADMIN Categories Routes ================================*/
     Route::prefix('/categories')->group(function(){
         Route::get('/', [CategoryController::class, 'index'])->name('categories');
         Route::get('/show/{category_id}', [CategoryController::class, 'show'])->name('category.show');
@@ -55,7 +63,7 @@ Route::middleware('auth')->prefix('/admin')->group(function() {
         Route::delete('/delete', [CategoryController::class, 'delete'])->name('category.delete');
     });
     
-    /*============================== ADMIN Dishes ================================*/
+    /*============================== ADMIN Dishes Routes ================================*/
     Route::prefix('/dishes')->group(function(){
         Route::get('/', [DishController::class, 'index'])->name('dishes');
         Route::get('/show/{dish_id}', [DishController::class, 'show'])->name('dish.show');
@@ -66,14 +74,13 @@ Route::middleware('auth')->prefix('/admin')->group(function() {
         Route::delete('/delete', [DishController::class, 'delete'])->name('dish.delete');
     });
     
-    /*============================== ADMIN Contacts ================================*/
+    /*============================== ADMIN Contacts Routes ================================*/
     Route::prefix('/contacts')->group(function(){
         Route::get('/', [ContactController::class, 'index'])->name('contacts');
-        Route::post('/store', [ContactController::class, 'store'])->name('contact.store');
         Route::delete('/delete', [ContactController::class, 'delete'])->name('contact.delete');
     });
     
-    /*============================== ADMIN Informations ================================*/
+    /*============================== ADMIN Informations Routes ================================*/
     Route::prefix('/informations')->group(function(){
         Route::get('/', [InformationController::class, 'index'])->name('informations');
         Route::get('/create', [InformationController::class, 'create'])->name('information.create');

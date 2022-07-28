@@ -16,9 +16,9 @@
                     <li>
                         <ol class="type">
                             <li><a href="#" data-filter="*" class="active">All</a></li>
-                            <li><a href="#" data-filter=".breakfast">Breakfast</a></li>
-                            <li><a href="#" data-filter=".lunch">Lunch</a></li>
-                            <li><a href="#" data-filter=".dinner">Dinner</a></li>
+                            @foreach ($gallery->categories as $category)
+                            <li><a href="#" data-filter=".{{strtolower($category)}}">{{ucWords($category)}}</a></li>
+                            @endforeach
                         </ol>
                     </li>
                 </ul>
@@ -35,7 +35,7 @@
                                 <div class="hover-text">
                                     <h4>{{$dish->name}}</h4>
                                 </div>
-                                <img src="{{asset("uploads/" . $dish->image)}}" class="img-responsive" alt="Project Title" style="width:360px; height:240px"> </a>
+                                <img src="{{asset("uploads/" . $dish->image)}}" class="img-responsive" alt="Project Title"> </a>
                         </div>
                     </div>
                 </div>

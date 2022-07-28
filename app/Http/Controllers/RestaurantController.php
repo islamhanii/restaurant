@@ -31,7 +31,14 @@ class RestaurantController extends Controller
     }
 
     public function getGallery() {
-        return $this->dishModel->with('category')->select('name', 'image', 'category_id')->inRandomOrder()->take(12)->get();
+        $dishes = $this->dishModel->with('category')->select('name', 'image', 'category_id')->inRandomOrder()->take(12)->get();
+        $categories = [];
+        foreach ($dishes as $dish) {
+            $name = $dish->category->name;
+            if(!in_array($name, $categories))   array_push($categories, $name); 
+        }
+        $dishes->categories = $categories;
+        return $dishes;
     }
 
     public function getChefs() {
@@ -45,5 +52,32 @@ class RestaurantController extends Controller
         $gallery = $this->getGallery();
         $chefs = $this->getChefs();
         return view('restaurant.index', compact('menu', 'gallery', 'chefs'));
+    }
+
+    /****************************************************************************************/
+
+    public function menu() {
+        $menu = $this->getMenu();
+        return view('restaurant.menu', compact('menu'));
+    }
+
+    /****************************************************************************************/
+
+    public function gallery() {
+        $gallery = $this->getGallery();
+        return view('restaurant.gallery', compact('gallery'));
+    }
+
+    /****************************************************************************************/
+
+    public function chefs() {
+        $chefs = $this->getChefs();
+        return view('restaurant.chefs', compact('chefs'));
+    }
+
+    /****************************************************************************************/
+
+    public function contact() {
+        return view('restaurant.contact');
     }
 }

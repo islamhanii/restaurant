@@ -44,16 +44,16 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Touché</a> </div>
+                <a class="navbar-brand page-scroll" href="{{route("restaurant.home")}}">Touché</a> </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.html" class="page-scroll">Home</a></li>
-                    <li><a href="menu.html" class="page-scroll">Menu</a></li>
-                    <li><a href="gallery.html" class="page-scroll">Gallery</a></li>
-                    <li><a href="chefs.html" class="page-scroll">Chefs</a></li>
-                    <li><a href="contact.html" class="page-scroll">Contact</a></li>
+                    <li><a href="{{route("restaurant.home")}}" class="page-scroll">Home</a></li>
+                    <li><a href="{{route("restaurant.menu")}}" class="page-scroll">Menu</a></li>
+                    <li><a href="{{route("restaurant.gallery")}}" class="page-scroll">Gallery</a></li>
+                    <li><a href="{{route("restaurant.chefs")}}" class="page-scroll">Chefs</a></li>
+                    <li><a href="{{route("restaurant.contact")}}" class="page-scroll">Contact</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -71,7 +71,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed.</p>
             </div>
             <div class="col-md-10 col-md-offset-1">
-                <form method="POST" action="{{url("contacts/store")}}">
+                <form method="POST" action="{{route("contact.store")}}">
                     @if(Session::has('success'))
                         <div class="col-12 mb-2 alert-success rounded-3 p-2">
                             <p class="mb-0 lh-base">{{Session::get('success')}}</p>
